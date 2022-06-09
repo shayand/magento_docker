@@ -17,6 +17,8 @@ services:
         - shared_network
       volumes:
         - db-data2:/var/lib/mysql
+      cap_add:
+        - SYS_NICE
 
     webserver:
       image: nginx:alpine
@@ -87,16 +89,16 @@ services:
       ports:
         - "${REDIS_PORT:-6379}:6379"
 
-    rabbitmq:
-      image: rabbitmq:${RABBITMQ_VERSION:-3}-management-alpine
-      ports:
-        - "${RABBITMQ_PORT:-5672}:5672"
-        - "${RABBITMQ_ADMIN_PORT:-15672}:15672"
-      networks:
-        - shared_network
-      volumes:
-        - disk-rabbit:/var/lib/rabbitmq/
-        - ./htdocs/var/log/rabbitmq/:/var/log/rabbitmq
+#    rabbitmq:
+#      image: rabbitmq:${RABBITMQ_VERSION:-3}-management-alpine
+#      ports:
+#        - "${RABBITMQ_PORT:-5672}:5672"
+#        - "${RABBITMQ_ADMIN_PORT:-15672}:15672"
+#      networks:
+#        - shared_network
+#      volumes:
+#        - disk-rabbit:/var/lib/rabbitmq/
+#        - ./htdocs/var/log/rabbitmq/:/var/log/rabbitmq
 
     cron:
       image: alpine:${ALPINE_VERSION:-3.10}

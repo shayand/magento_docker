@@ -60,6 +60,8 @@ RUN pecl install -o -f redis \
     && rm -rf /tmp/pear \
     && echo "extension=redis.so" > /usr/local/etc/php/conf.d/docker-php-ext-redis.ini
 
+RUN apt-get update && \
+    apt-get install -y sendmail
 
 # Set ID
 RUN usermod -u 1000 www-data
