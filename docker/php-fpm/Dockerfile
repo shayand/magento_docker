@@ -19,7 +19,8 @@ RUN apt-get install -y libpq-dev \
     && docker-php-ext-install pdo pdo_mysql pdo_pgsql
 
 RUN apt-get update && \
-    apt-get install -y zlib1g-dev libpng-dev libjpeg-dev
+    apt-get install -y zlib1g-dev libpng-dev libjpeg-dev && \
+    apt-get install -y -qq libjpeg62-turbo-dev libxml2-dev libxslt-dev libsodium-dev libzip-dev libfreetype6-dev
 
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install gd
